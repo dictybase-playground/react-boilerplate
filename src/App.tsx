@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react"
+import { ApolloProvider } from "@apollo/client"
+import { BrowserRouter } from "react-router-dom"
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles"
+import useApolloClient from "./hooks/useApolloClient"
 
-function App() {
+const theme = createMuiTheme({})
+
+const App = () => {
+  const apolloClient = useApolloClient()
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <ApolloProvider client={apolloClient}>
+      <MuiThemeProvider theme={theme}>
+        <BrowserRouter>
+          <div>This is the main App component</div>
+        </BrowserRouter>
+      </MuiThemeProvider>
+    </ApolloProvider>
+  )
 }
 
-export default App;
+export default App
